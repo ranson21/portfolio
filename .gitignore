@@ -1,0 +1,12 @@
+# Ignore Environment variables
+.env
+
+# Ignore terraform state
+.terraform
+*.tfstate
+*.tfstate.*backup
+terraform/
+.terragrunt-cache
+
+# Ignore Mac files
+.DS_Store

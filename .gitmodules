@@ -1,0 +1,9 @@
+[submodule "assets/modules/tf-gcp-dns"]
+path = assets/modules/tf-gcp-dns
+url = git@github.com:ranson21/tf-gcp-dns
+[submodule "assets/modules/tf-gcp-project"]
+path = assets/modules/tf-gcp-project
+url = git@github.com:ranson21/tf-gcp-project
+[submodule "apps/web"]
+	path = apps/web
+	url = git@github.com:ranson21/portfolio-web
