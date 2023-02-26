@@ -7,3 +7,12 @@ url = git@github.com:ranson21/tf-gcp-project
 [submodule "apps/web"]
 	path = apps/web
 	url = git@github.com:ranson21/portfolio-web
+[submodule "assets/modules/tf-gcp-cdn"]
+	path = assets/modules/tf-gcp-cdn
+	url = git@github.com:ranson21/tf-gcp-cdn
+[submodule "assets/modules/tf-gcp-lb"]
+	path = assets/modules/tf-gcp-lb
+	url = git@github.com:ranson21/tf-gcp-lb
+[submodule "assets/modules/tf-gcp-vpc"]
+	path = assets/modules/tf-gcp-vpc
+	url = git@github.com:ranson21/tf-gcp-vpc
