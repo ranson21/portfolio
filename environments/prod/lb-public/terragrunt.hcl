@@ -4,15 +4,28 @@ include "parent" {
 }
 
 terraform {
-  source = "git@github.com:ranson21/tf-gcp-cdn"
+  // source = "git@github.com:ranson21/tf-gcp-lb"
+  source = "${get_parent_terragrunt_dir()}/..//assets/modules/tf-gcp-lb"
 }
 
 inputs = {
-  name        = "${include.parent.locals.project}-cdn"
-  bucket_name = dependency.dns.outputs.dns_name
-  region      = include.parent.locals.region
-  domain      = dependency.dns.outputs.dns_name
-  lb_name     = "${include.parent.locals.project}-lb"
+  name    = "${include.parent.locals.project}-lb"
+  project = dependency.project.outputs.project
+  domain  = dependency.dns.outputs.dns_name
+  url_map = dependency.cdn.outputs.url_map
+  network = dependency.dns.outputs.name
+}
+
+dependency "cdn" {
+  config_path = "../web-cdn"
+  mock_outputs_allowed_terraform_commands = [
+    "init",
+    "validate",
+    "plan",
+  ]
+  mock_outputs = {
+    url_map = ""
+  }
 }
 
 dependency "dns" {
