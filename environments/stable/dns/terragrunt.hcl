@@ -1,9 +1,10 @@
 include "parent" {
-  path = find_in_parent_folders()
+  path   = find_in_parent_folders()
+  expose = true
 }
 
 terraform {
-  source = "git@github.com:ranson21/tf-gcp-dns"
+  source = "${include.parent.locals.source}/tf-gcp-dns"
 }
 
 inputs = {
@@ -13,7 +14,7 @@ inputs = {
 }
 
 dependency "project" {
-  config_path = "../project"
+  config_path = "../../global/project"
   mock_outputs_allowed_terraform_commands = [
     "init",
     "validate",

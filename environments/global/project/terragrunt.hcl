@@ -4,7 +4,7 @@ include "parent" {
 }
 
 terraform {
-  source = "git@github.com:ranson21/tf-gcp-project"
+  source = "${include.parent.locals.source}/tf-gcp-project"
 }
 
 inputs = {
@@ -12,4 +12,7 @@ inputs = {
   project_id      = include.parent.locals.project
   region          = include.parent.locals.region
   project_name    = "Abby Ranson Portfolio"
+  labels = {
+    "firebase" = "enabled"
+  }
 }

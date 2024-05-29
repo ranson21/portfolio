@@ -1,21 +1,20 @@
 include "parent" {
-  path = find_in_parent_folders()
+  path   = find_in_parent_folders()
+  expose = true
 }
 
 terraform {
-  source = "git@github.com:ranson21/tf-gcp-vpc"
+  source = "${include.parent.locals.source}/tf-gcp-vpc"
 }
 
 inputs = {
   project = dependency.project.outputs.project
   name    = "${dependency.project.outputs.project}-vpc"
-  source_ranges = [
-    "0.0.0.0/0",
-  ]
+  region  = include.parent.locals.region
 }
 
 dependency "project" {
-  config_path = "../project"
+  config_path = "../../global/project"
   mock_outputs_allowed_terraform_commands = [
     "init",
     "validate",
@@ -28,7 +27,7 @@ dependency "project" {
 }
 
 dependency "apis" {
-  config_path = "../gcp-apis"
+  config_path = "../../global/gcp-apis"
   mock_outputs_allowed_terraform_commands = [
     "init",
     "validate",

@@ -1,18 +1,33 @@
+locals {
+  version_number = "1.0.0"
+  version        = "release-${local.version_number}"
+}
+
 include "parent" {
   path   = find_in_parent_folders()
   expose = true
 }
 
 terraform {
-  source = "git@github.com:ranson21/tf-gcp-cdn"
+  source = "${include.parent.locals.source}/tf-web-deployer"
 }
 
 inputs = {
-  name        = "${include.parent.locals.project}-cdn"
-  bucket_name = dependency.dns.outputs.dns_name
-  region      = include.parent.locals.region
-  domain      = dependency.dns.outputs.dns_name
-  lb_name     = "${include.parent.locals.project}-lb"
+  release_version = "${local.version}"
+  owner           = "ranson21"
+  repo            = "portfolio-web"
+  bucket_name     = dependency.dns.outputs.dns_name
+}
+
+dependency "cdn" {
+  config_path = "../web-cdn"
+  mock_outputs_allowed_terraform_commands = [
+    "init",
+    "validate",
+    "plan",
+  ]
+  mock_outputs = {
+  }
 }
 
 dependency "dns" {
@@ -28,7 +43,7 @@ dependency "dns" {
 }
 
 dependency "project" {
-  config_path = "../project"
+  config_path = "../../global/project"
   mock_outputs_allowed_terraform_commands = [
     "init",
     "validate",
@@ -41,7 +56,7 @@ dependency "project" {
 }
 
 dependency "apis" {
-  config_path = "../gcp-apis"
+  config_path = "../../global/gcp-apis"
   mock_outputs_allowed_terraform_commands = [
     "init",
     "validate",
