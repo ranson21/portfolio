@@ -1,0 +1,6 @@
+[submodule "assets/modules/tf-gcp-gh-pipeline"]
+	path = assets/modules/tf-gcp-gh-pipeline
+	url = git@github.com:ranson21/tf-gcp-gh-pipeline.git
+[submodule "assets/modules/tf-gcp-dns"]
+	path = assets/modules/tf-gcp-dns
+	url = git@github.com:ranson21/tf-gcp-dns.git
