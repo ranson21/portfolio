@@ -4,3 +4,18 @@
 [submodule "assets/modules/tf-gcp-dns"]
 	path = assets/modules/tf-gcp-dns
 	url = git@github.com:ranson21/tf-gcp-dns.git
+[submodule "assets/modules/tf-gcp-secret"]
+	path = assets/modules/tf-gcp-secret
+	url = git@github.com:ranson21/tf-gcp-secret.git
+[submodule "assets/modules/tf-gcp-project"]
+	path = assets/modules/tf-gcp-project
+	url = git@github.com:ranson21/tf-gcp-project.git
+[submodule "assets/modules/tf-gcp-cloudfunction"]
+	path = assets/modules/tf-gcp-cloudfunction
+	url = git@github.com:ranson21/tf-gcp-cloudfunction.git
+[submodule "assets/scripts/cloud-functions"]
+	path = assets/scripts/cloud-functions
+	url = git@github.com:ranson21/cloud-functions.git
+[submodule "assets/modules/tf-gcp-storage"]
+	path = assets/modules/tf-gcp-storage
+	url = git@github.com:ranson21/tf-gcp-storage.git
