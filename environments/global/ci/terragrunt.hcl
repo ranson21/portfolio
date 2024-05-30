@@ -8,7 +8,17 @@ terraform {
 }
 
 inputs = {
-  project = dependency.project.outputs.project
+  region          = include.parent.locals.region
+  project         = dependency.project.outputs.project
+  project_number  = dependency.project.outputs.project_number
+  deploy_key_id   = "github_token"
+  connection_name = "github"
+  installation_id = "51375780"
+  repo_owner      = "ranson21"
+  repos = [
+    "tmpl-nodejs-express",
+    "cloud-functions"
+  ]
 }
 
 dependency "project" {

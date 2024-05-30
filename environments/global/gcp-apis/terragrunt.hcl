@@ -10,6 +10,9 @@ inputs = {
   project_id                  = dependency.project.outputs.project
   disable_services_on_destroy = false
   activate_apis = [
+    "cloudbilling.googleapis.com",
+    "cloudfunctions.googleapis.com",
+    "billingbudgets.googleapis.com",
     "run.googleapis.com",
     "artifactregistry.googleapis.com",
     "compute.googleapis.com",
