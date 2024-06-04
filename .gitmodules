@@ -19,3 +19,6 @@
 [submodule "assets/modules/tf-gcp-storage"]
 	path = assets/modules/tf-gcp-storage
 	url = git@github.com:ranson21/tf-gcp-storage.git
+[submodule "assets/builders"]
+	path = assets/builders
+	url = git@github.com:GoogleCloudPlatform/cloud-builders-community
