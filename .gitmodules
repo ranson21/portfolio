@@ -22,3 +22,6 @@
 [submodule "assets/builders"]
 	path = assets/builders
 	url = git@github.com:GoogleCloudPlatform/cloud-builders-community
+[submodule "assets/modules/tf-gcp-cloud-run"]
+	path = assets/modules/tf-gcp-cloud-run
+	url = git@github.com:ranson21/tf-gcp-cloud-run

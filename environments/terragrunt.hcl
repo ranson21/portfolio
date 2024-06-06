@@ -1,5 +1,6 @@
 locals {
   owner           = "ranson21"
+  domain          = "abbyranson.com"
   bucket_name     = get_env("TF_STATE_BUCKET", "portfolio-terraform")
   project         = get_env("GCP_PROJECT", "abby-ranson")
   region          = get_env("REGION", "us-central1")

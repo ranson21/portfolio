@@ -9,8 +9,24 @@ terraform {
 
 inputs = {
   zone_name = "public-dns"
-  domain    = "abbyranson.com"
+  domain    = include.parent.locals.domain
   project   = dependency.project.outputs.project
+
+  records = {
+    "${include.parent.locals.domain}" = dependency.portfolio-lb.outputs.external_ip
+  }
+}
+
+dependency "portfolio-lb" {
+  config_path = "../gateways/portfolio"
+  mock_outputs_allowed_terraform_commands = [
+    "init",
+    "validate",
+    "plan",
+  ]
+  mock_outputs = {
+    project = ""
+  }
 }
 
 dependency "project" {
