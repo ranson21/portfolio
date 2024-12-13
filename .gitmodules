@@ -25,3 +25,6 @@
 [submodule "assets/modules/tf-gcp-cloud-run"]
 	path = assets/modules/tf-gcp-cloud-run
 	url = git@github.com:ranson21/tf-gcp-cloud-run
+[submodule "apps/web/portfolio"]
+	path = apps/web/portfolio
+	url = git@github.com:ranson21/portfolio-web
