@@ -31,3 +31,6 @@
 [submodule "assets/modules/tf-gcp-lb"]
 	path = assets/modules/tf-gcp-lb
 	url = git@github.com:ranson21/tf-gcp-lb
+[submodule "assets/modules/tf-gcp-bucket"]
+	path = assets/modules/tf-gcp-bucket
+	url = git@github.com:ranson21/tf-gcp-bucket

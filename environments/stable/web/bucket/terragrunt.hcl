@@ -6,7 +6,7 @@ include "parent" {
 }
 
 terraform {
-  source = "git@github.com:terraform-google-modules/terraform-google-cloud-storage?ref=v5.0.0"
+  source = "${include.parent.locals.source}/tf-gcp-bucket"
 }
 
 locals {
@@ -14,41 +14,26 @@ locals {
   bucket_name = include.parent.locals.domain
 }
 
-inputs = {
-  project_id = dependency.project.outputs.project
-  names      = [local.bucket_name] # Using domain name as bucket name
-  prefix     = ""
 
-  # Configure the bucket for website hosting
-  website = {
+inputs = {
+  project_id        = dependency.project.outputs.project
+  bucket_name       = local.bucket_name
+  location          = "US"
+  storage_class     = "STANDARD"
+  force_destroy     = true
+  enable_versioning = false
+
+  website_config = {
     main_page_suffix = "index.html"
     not_found_page   = "404.html"
   }
 
-  # Make the bucket publicly readable
-  public_access_prevention = "enforced"
-  iam_members = [{
-    role   = "roles/storage.objectViewer"
-    member = "allUsers"
-  }]
-
-  # Configure CORS for web assets
-  cors = [{
+  cors_rules = [{
     origin          = [include.parent.locals.domain]
     method          = ["GET", "HEAD", "OPTIONS"]
     response_header = ["*"]
     max_age_seconds = 3600
   }]
-
-  storage_class = "STANDARD"
-
-  force_destroy = {
-    "${local.bucket_name}" = true
-  }
-
-  versioning = {
-    "${local.bucket_name}" = false
-  }
 
   lifecycle_rules = [{
     action = {
