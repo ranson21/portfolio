@@ -28,3 +28,6 @@
 [submodule "apps/web/portfolio"]
 	path = apps/web/portfolio
 	url = git@github.com:ranson21/portfolio-web
+[submodule "assets/modules/tf-gcp-lb"]
+	path = assets/modules/tf-gcp-lb
+	url = git@github.com:ranson21/tf-gcp-lb

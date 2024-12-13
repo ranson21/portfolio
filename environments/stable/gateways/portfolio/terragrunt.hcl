@@ -8,100 +8,74 @@ include "parent" {
 }
 
 terraform {
-  source = "git@github.com:terraform-google-modules/terraform-google-lb-http?ref=v11.1.0"
+  source = "${include.parent.locals.source}/tf-gcp-lb"
 }
 
 inputs = {
-  name    = "${include.parent.locals.project}-lb"
   project = dependency.project.outputs.project
-  // network                         = dependency.vpc.outputs.name
-  ssl                             = true
-  https_redirect                  = true
-  managed_ssl_certificate_domains = [include.parent.locals.domain]
-  firewall_networks               = []
+  name    = "${include.parent.locals.project}-lb"
 
-  backends = {
-    default = {
-      description = null
-      groups = [
-        {
-          group = dependency.svc_test.outputs.serverless_neg_id
-        }
-      ]
-      enable_cdn = false
+  ssl     = true
+  domains = [include.parent.locals.domain]
 
-      iap_config = {
-        enable = false
-      }
-      log_config = {
-        enable = false
+  # Configure the static website backend bucket
+  backend_buckets = {
+    static = {
+      bucket_name = include.parent.locals.domain
+      enable_cdn  = true
+      description = "Static website bucket backend"
+      cdn_policy = {
+        cache_mode        = "CACHE_ALL_STATIC"
+        default_ttl       = 3600
+        client_ttl        = 3600
+        max_ttl           = 86400
+        negative_caching  = true
+        serve_while_stale = 86400
       }
     }
   }
-  // url_map = {
-  //   name            = "lb-url-map"
-  //   default_service = dependency.svc_test.outputs.serverless_neg_id
 
-  //   host_rule = {
-  //     hosts        = [dependency.dns.outputs.dns_name]
-  //     path_matcher = local.site_name
-  //   }
-
-  //   path_matcher = {
-  //     name = local.site_name
-
-  //     path_rule = {
-  //       paths   = ["/test"]
-  //       service = dependency.svc_test.outputs.serverless_neg_id
-  //     }
-  //   }
-  // }
-}
-
-dependency "svc_test" {
-  config_path = "../../services/test"
-  mock_outputs_allowed_terraform_commands = [
-    "init",
-    "validate",
-    "plan",
-  ]
-  mock_outputs = {
-    dns_name = ""
+  # URL map configuration
+  url_map_config = {
+    default_service = "static"
+    host_rules = [{
+      hosts        = [include.parent.locals.domain]
+      path_matcher = local.site_name
+    }]
+    path_matchers = [{
+      name            = local.site_name
+      default_service = "static"
+    }]
   }
 }
 
-dependency "vpc" {
-  config_path = "../../vpc"
-  mock_outputs_allowed_terraform_commands = [
-    "init",
-    "validate",
-    "plan",
-  ]
+dependency "storage" {
+  config_path                             = "../../web/bucket"
+  mock_outputs_allowed_terraform_commands = ["init", "validate", "plan"]
   mock_outputs = {
-    dns_name = ""
+    bucket_name = ""
   }
 }
+
+# dependency "api_service" {
+#   config_path = "../api"
+#   mock_outputs_allowed_terraform_commands = ["init", "validate", "plan"]
+#   mock_outputs = {
+#     serverless_neg_id = ""
+#   }
+# }
 
 dependency "project" {
-  config_path = "../../../global/project"
-  mock_outputs_allowed_terraform_commands = [
-    "init",
-    "validate",
-    "plan",
-    "import",
-  ]
+  config_path                             = "../../../global/project"
+  mock_outputs_allowed_terraform_commands = ["init", "validate", "plan", "import"]
   mock_outputs = {
     project = ""
   }
 }
 
 dependency "apis" {
-  config_path = "../../../global/gcp-apis"
-  mock_outputs_allowed_terraform_commands = [
-    "init",
-    "validate",
-    "plan",
-  ]
+  config_path                             = "../../../global/gcp-apis"
+  mock_outputs_allowed_terraform_commands = ["init", "validate", "plan"]
   mock_outputs = {
   }
 }

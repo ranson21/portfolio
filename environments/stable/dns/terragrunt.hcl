@@ -25,7 +25,7 @@ dependency "portfolio-lb" {
     "plan",
   ]
   mock_outputs = {
-    project = ""
+    external_ip = ""
   }
 }
 
