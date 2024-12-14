@@ -17,7 +17,8 @@ inputs = {
   repo_owner      = "ranson21"
   repos = [
     "tmpl-nodejs-express",
-    "cloud-functions"
+    "cloud-functions",
+    "portfolio-web"
   ]
 }
 
