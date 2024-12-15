@@ -28,7 +28,7 @@ inputs = {
 
       required_status_checks = {
         strict   = true
-        contexts = ["portfolio-web (abby-ranson)"] # Changed from 'checks' to 'contexts'
+        contexts = ["portfolio-web (abby-ranson)", "check-labels"] # Changed from 'checks' to 'contexts'
       }
 
       required_pull_request_reviews = {
@@ -36,8 +36,8 @@ inputs = {
         require_code_owner_reviews = true
       }
 
-      required_pull_request_labels = {
-        require_any = [
+      requires_pull_request_labels = {
+        labels = [ # Note: changed structure to use 'labels' key
           "semver:major",
           "semver:minor",
           "semver:patch"
