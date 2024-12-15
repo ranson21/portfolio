@@ -1,0 +1,9 @@
+- name: "semver:patch"
+  color: "0E8A16" # A calming green, indicating safe/patch updates
+  description: "Backwards-compatible bug fixes"
+- name: "semver:minor"
+  color: "FBCA04" # A cautionary yellow, indicating new features
+  description: "Backwards-compatible functionality additions"
+- name: "semver:major"
+  color: "D93F0B" # A warning orange/red, indicating breaking changes
+  description: "Incompatible API changes"
