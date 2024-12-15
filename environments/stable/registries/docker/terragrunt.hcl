@@ -8,7 +8,8 @@ terraform {
 }
 
 inputs = {
-  name = "docker"
+  name       = "docker"
+  user_email = "abbyranson27@gmail.com"
 }
 
 dependency "project" {

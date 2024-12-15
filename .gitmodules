@@ -34,3 +34,9 @@
 [submodule "assets/modules/tf-gcp-bucket"]
 	path = assets/modules/tf-gcp-bucket
 	url = git@github.com:ranson21/tf-gcp-bucket
+[submodule "assets/scripts/ranson-scripts"]
+	path = assets/scripts/ranson-scripts
+	url = git@github.com:ranson21/ranson-scripts
+[submodule "assets/modules/tf-gcp-artifact-registry"]
+	path = assets/modules/tf-gcp-artifact-registry
+	url = git@github.com:ranson21/tf-gcp-artifact-registry
