@@ -1,0 +1,28 @@
+steps:
+  # Download and install Terragrunt
+  - name: "gcr.io/cloud-builders/wget"
+    args:
+      - -O
+      - /workspace/terragrunt
+      - "https://github.com/gruntwork-io/terragrunt/releases/download/v0.54.24/terragrunt_linux_amd64"
+    id: "download-terragrunt"
+
+  # Make Terragrunt executable
+  - name: "ubuntu"
+    args: ["chmod", "+x", "/workspace/terragrunt"]
+    id: "prepare-terragrunt"
+
+  # Run Terragrunt apply-all
+  - name: "hashicorp/terraform:1.6"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        cd environments/stable
+        /workspace/terragrunt run-all apply --terragrunt-non-interactive
+    id: "terragrunt-apply"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: "1200s" # 20 minute timeout

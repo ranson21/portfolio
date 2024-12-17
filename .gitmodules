@@ -40,3 +40,6 @@
 [submodule "assets/modules/tf-gcp-artifact-registry"]
 	path = assets/modules/tf-gcp-artifact-registry
 	url = git@github.com:ranson21/tf-gcp-artifact-registry
+[submodule "assets/modules/tf-web-deployer"]
+	path = assets/modules/tf-web-deployer
+	url = git@github.com:ranson21/tf-web-deployer
