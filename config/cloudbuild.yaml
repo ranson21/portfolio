@@ -22,7 +22,7 @@ steps:
         apk add --no-cache curl
 
         # Configure Git to use GITHUB_TOKEN
-        git config --global url."https://oauth2:${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
+        git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
 
         cd environments/stable
         /workspace/terragrunt run-all apply --terragrunt-non-interactive
