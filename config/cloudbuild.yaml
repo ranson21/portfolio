@@ -12,42 +12,17 @@ steps:
     args: ["chmod", "+x", "/workspace/terragrunt"]
     id: "prepare-terragrunt"
 
-  # Copy entire google-cloud-sdk to workspace
-  - name: "gcr.io/google.com/cloudsdktool/google-cloud-cli:latest"
+  # Run Terragrunt apply-all using Google Cloud SDK image as base
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
     entrypoint: "bash"
-    args:
-      - "-c"
-      - |
-        cp -r /google-cloud-sdk /workspace/
-        chmod -R 755 /workspace/google-cloud-sdk
-
-  # Run Terragrunt apply-all
-  - name: "hashicorp/terraform:1.6"
-    entrypoint: "sh"
     secretEnv: ["GITHUB_TOKEN"]
     args:
       - "-c"
       - |
-        apk add --no-cache \
-          curl \
-          git \
-          bash \
-          jq \
-          wget \
-          tar \
-          gzip \
-          python3 \
-          py3-pip \
-          py3-crcmod
-
-        # Add gsutil to PATH and set environment variables
-        export PATH="/workspace/google-cloud-sdk/bin:$${PATH}"
-        export CLOUDSDK_PYTHON=/usr/bin/python3
-        export CLOUDSDK_ROOT_DIR=/workspace/google-cloud-sdk
-
-        # Verify gsutil installation
-        echo "Testing gsutil..."
-        gsutil version
+        # Install terraform
+        curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+        apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        apt-get update && apt-get install -y terraform=1.6.0*
 
         # Configure Git to use GITHUB_TOKEN
         git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
