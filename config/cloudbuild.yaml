@@ -26,10 +26,22 @@ steps:
           jq \
           wget \
           tar \
-          gzip
+          gzip \
+          python3 \
+          py3-pip \
+          py3-crcmod
+
+        # Install Google Cloud SDK
+        wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
+        tar zxf google-cloud-sdk.tar.gz
+        ./google-cloud-sdk/install.sh --quiet
+        PATH=$PATH:/google-cloud-sdk/bin
 
         # Configure Git to use GITHUB_TOKEN
         git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
+
+        # Export the token so terragrunt can access it
+        export GITHUB_TOKEN="$${GITHUB_TOKEN}"
 
         cd environments/stable
         /workspace/terragrunt run-all apply --terragrunt-non-interactive
