@@ -15,6 +15,7 @@ steps:
   # Run Terragrunt apply-all
   - name: "hashicorp/terraform:1.6"
     entrypoint: "sh"
+    secretEnv: ["GITHUB_TOKEN"]
     args:
       - "-c"
       - |
@@ -26,3 +27,8 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 timeout: "1200s" # 20 minute timeout
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/github_token/versions/latest
+      env: "GITHUB_TOKEN"

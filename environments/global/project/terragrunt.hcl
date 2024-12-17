@@ -15,7 +15,7 @@ inputs = {
   # Billing and budget configuration
   billing_account = include.parent.locals.billing_account
   budget_name     = "portfolio-billing"
-  budget_amount   = "20"
+  budget_amount   = "30"
   budget_topic    = "budget_monitor"
 
   labels = {
