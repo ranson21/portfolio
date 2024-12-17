@@ -5,7 +5,7 @@ locals {
   project         = get_env("GCP_PROJECT", "abby-ranson")
   region          = get_env("REGION", "us-central1")
   billing_account = get_env("BILLING_ACCOUNT", "abbyranson.com")
-  source          = get_env("TF_LOCAL", "false") == "true" ? "${get_parent_terragrunt_dir()}/..//assets/modules" : "git@github.com:ranson21"
+  source          = get_env("TF_LOCAL", "false") == "true" ? "${get_parent_terragrunt_dir()}/..//assets/modules" : "git::https://github.com/ranson21"
 }
 
 remote_state {
