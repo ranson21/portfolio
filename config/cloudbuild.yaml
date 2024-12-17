@@ -4,7 +4,7 @@ steps:
     args:
       - -O
       - /workspace/terragrunt
-      - "https://github.com/gruntwork-io/terragrunt/releases/download/v0.54.24/terragrunt_linux_amd64"
+      - "https://github.com/gruntwork-io/terragrunt/releases/download/v0.69.13/terragrunt_linux_amd64"
     id: "download-terragrunt"
 
   # Make Terragrunt executable
