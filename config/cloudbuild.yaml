@@ -36,7 +36,7 @@ steps:
         tar zxf google-cloud-sdk.tar.gz
         ./google-cloud-sdk/install.sh --quiet
         PATH=$${PATH}:/google-cloud-sdk/bin
-        source ./google-cloud-sdk/path.bash.in
+        source ./google-cloud-sdk/path.bash.inc
 
         # Configure Git to use GITHUB_TOKEN
         git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
