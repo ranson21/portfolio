@@ -54,6 +54,7 @@ terraform {
 
 # Force replacement of the null_resource when version changes
 inputs = {
+  github_token    = get_env("GITHUB_TOKEN")
   owner           = "ranson21"
   repo            = "portfolio-web"
   release_version = local.latest_version
