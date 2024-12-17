@@ -19,7 +19,14 @@ steps:
     args:
       - "-c"
       - |
-        apk add --no-cache curl git bash
+        apk add --no-cache \
+          curl \
+          git \
+          bash \
+          jq \
+          wget \
+          tar \
+          gzip
 
         # Configure Git to use GITHUB_TOKEN
         git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
