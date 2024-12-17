@@ -19,6 +19,8 @@ steps:
     args:
       - "-c"
       - |
+        apk add --no-cache curl
+
         cd environments/stable
         /workspace/terragrunt run-all apply --terragrunt-non-interactive
     id: "terragrunt-apply"
