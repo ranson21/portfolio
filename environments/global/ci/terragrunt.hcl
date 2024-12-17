@@ -16,9 +16,20 @@ inputs = {
   installation_id = "51375780"
   repo_owner      = "ranson21"
   repos = [
-    "tmpl-nodejs-express",
-    "cloud-functions",
-    "portfolio-web"
+    {
+      name = "portfolio-web"
+    },
+    {
+      name = "tmpl-nodejs-express"
+    },
+    {
+      name = "cloud-functions"
+    },
+    {
+      name         = "portfolio"
+      pr_trigger   = false # Only create push trigger
+      push_trigger = true
+    },
   ]
 }
 
