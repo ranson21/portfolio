@@ -18,13 +18,23 @@ steps:
     args:
       - "-c"
       - |
-        # Create a directory to copy gsutil and its dependencies
+        # Show current paths for debugging
+        echo "Showing paths:"
+        which gsutil
+        which gcloud
+        ls -la /google-cloud-sdk
+
+        # Create directories
         mkdir -p /workspace/google-cloud-sdk/bin
+        mkdir -p /workspace/google-cloud-sdk/platform
+
+        # Copy the executables
         cp $(which gsutil) /workspace/google-cloud-sdk/bin/
         cp $(which gcloud) /workspace/google-cloud-sdk/bin/
-        # Copy necessary Python files and libraries
-        cp -r /usr/lib/python* /workspace/
-        cp -r /usr/lib/google-cloud-sdk /workspace/
+
+        # Copy the platform-specific files
+        cp -r /google-cloud-sdk/platform/gsutil /workspace/google-cloud-sdk/platform/
+        cp -r /google-cloud-sdk/lib /workspace/google-cloud-sdk/
 
   # Run Terragrunt apply-all
   - name: "hashicorp/terraform:1.6"
@@ -45,9 +55,14 @@ steps:
           py3-pip \
           py3-crcmod
 
-        # Add gsutil to PATH
+        # Add gsutil to PATH and set environment variables
         export PATH="/workspace/google-cloud-sdk/bin:$${PATH}"
         export CLOUDSDK_PYTHON=/usr/bin/python3
+        export PYTHONPATH=/workspace/google-cloud-sdk/platform/gsutil
+
+        # Verify gsutil installation
+        echo "Testing gsutil..."
+        gsutil --version
 
         # Configure Git to use GITHUB_TOKEN
         git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
