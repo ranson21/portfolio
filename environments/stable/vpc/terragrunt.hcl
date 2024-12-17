@@ -10,7 +10,7 @@ include "parent" {
 }
 
 terraform {
-  source = "git@github.com:terraform-google-modules/terraform-google-network?ref=v9.1.0"
+  source = "github.com/terraform-google-modules/terraform-google-network.git?ref=v9.1.0"
 }
 
 inputs = {
