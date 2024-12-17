@@ -12,6 +12,20 @@ steps:
     args: ["chmod", "+x", "/workspace/terragrunt"]
     id: "prepare-terragrunt"
 
+  # Install gsutil and prepare workspace
+  - name: "gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        # Create a directory to copy gsutil and its dependencies
+        mkdir -p /workspace/google-cloud-sdk/bin
+        cp $(which gsutil) /workspace/google-cloud-sdk/bin/
+        cp $(which gcloud) /workspace/google-cloud-sdk/bin/
+        # Copy necessary Python files and libraries
+        cp -r /usr/lib/python* /workspace/
+        cp -r /usr/lib/google-cloud-sdk /workspace/
+
   # Run Terragrunt apply-all
   - name: "hashicorp/terraform:1.6"
     entrypoint: "sh"
@@ -31,20 +45,9 @@ steps:
           py3-pip \
           py3-crcmod
 
-        # Install Google Cloud SDK
-        wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
-        tar zxf google-cloud-sdk.tar.gz
-
-        # Install without user input and update PATH
-        ./google-cloud-sdk/install.sh --quiet --install-dir=/usr/local
-        export PATH="/usr/local/google-cloud-sdk/bin:$${PATH}"
-
-        # Verify gsutil is available
-        which gsutil || echo "gsutil not found in PATH: $${PATH}"
-
-        # Initialize gcloud (no user input required)
-        gcloud config set disable_usage_reporting true
-        gcloud config set project $${PROJECT_ID}
+        # Add gsutil to PATH
+        export PATH="/workspace/google-cloud-sdk/bin:$${PATH}"
+        export CLOUDSDK_PYTHON=/usr/bin/python3
 
         # Configure Git to use GITHUB_TOKEN
         git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
