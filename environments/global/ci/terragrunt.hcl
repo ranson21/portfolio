@@ -26,6 +26,11 @@ inputs = {
       name = "cloud-functions"
     },
     {
+      name         = "github-ops-cli"
+      pr_trigger   = false # Only create push trigger
+      push_trigger = true
+    },
+    {
       name         = "portfolio"
       pr_trigger   = false # Only create push trigger
       push_trigger = true
