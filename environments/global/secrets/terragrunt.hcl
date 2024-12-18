@@ -10,7 +10,8 @@ terraform {
 inputs = {
   project = dependency.project.outputs.project
   secrets = {
-    github_token = get_env("GH_TOKEN")
+    github_token      = get_env("GITHUB_TOKEN")
+    slack_webhook_url = get_env("SLACK_WEBHOOK_URL")
   }
 }
 

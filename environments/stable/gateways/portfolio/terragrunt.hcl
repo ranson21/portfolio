@@ -35,6 +35,24 @@ inputs = {
     }
   }
 
+  # Add backend services configuration
+  backend_services = {
+    contact = {
+      protocol     = "HTTPS"
+      port_name    = "http"
+      enable_cdn   = false
+      description  = "Contact form API backend"
+      port         = 443              # Added required port
+      backend_type = "SERVERLESS_NEG" # Added required backend_type
+      backends = [{
+        group           = dependency.contact_function.outputs.serverless_neg_id
+        balancing_mode  = "UTILIZATION"
+        capacity_scaler = 1.0
+      }]
+    }
+  }
+
+
   # URL map configuration
   url_map_config = {
     default_service = "static"
@@ -45,7 +63,20 @@ inputs = {
     path_matchers = [{
       name            = local.site_name
       default_service = "static"
+      path_rules = [{
+        paths   = ["/api/contact/*", "/api/contact"] # Added wildcard and exact match
+        service = "contact"
+      }]
     }]
+  }
+}
+
+
+dependency "contact_function" {
+  config_path                             = "../../services/contact_me"
+  mock_outputs_allowed_terraform_commands = ["init", "validate", "plan"]
+  mock_outputs = {
+    serverless_neg_id = ""
   }
 }
 
