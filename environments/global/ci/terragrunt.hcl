@@ -31,6 +31,19 @@ inputs = {
       push_trigger = true
     },
   ]
+  cloudbuild_roles = [
+    "roles/artifactregistry.reader",
+    "roles/storage.admin",
+    "roles/compute.admin",
+    "roles/compute.networkAdmin",
+    "roles/compute.securityAdmin",
+    "roles/dns.admin",
+    "roles/iam.serviceAccountAdmin",
+    "roles/iam.serviceAccountUser",
+    "roles/cloudfunctions.admin",
+    "roles/resourcemanager.projectIamAdmin",
+    "roles/iam.securityAdmin"
+  ]
 }
 
 dependency "project" {
