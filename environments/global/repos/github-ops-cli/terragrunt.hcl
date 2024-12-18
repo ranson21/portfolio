@@ -18,17 +18,17 @@ inputs = {
 
   issue_labels = local.labels
 
-  required_status_checks = {
-    strict   = true
-    contexts = ["check-labels"] # Changed from 'checks' to 'contexts'
-  }
-
   # Branch protection for master/main
   branch_protections_v4 = [
     {
       pattern                         = "master"
       enforce_admins                  = false
       require_conversation_resolution = true
+
+      required_status_checks = {
+        strict   = true
+        contexts = ["check-labels"] # Changed from 'checks' to 'contexts'
+      }
 
       required_pull_request_reviews = {
         dismiss_stale_reviews      = true
