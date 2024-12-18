@@ -9,41 +9,21 @@ A comprehensive infrastructure monorepo containing Terraform modules, deployment
 ```mermaid
 graph TD
     A[Root Repository] --> B[apps]
+    B --> B1[web]
+    A --> G[environments]
+    G --> G3[dev]
+    G --> G1[stable]
+    G --> G2[global]
     A --> C[assets]
-    B --> B1[web/portfolio]
-    C --> D[builders]
+    B1 --> B2[portfolio]
     C --> E[modules]
     C --> F[scripts]
     E --> E1[GCP Terraform Modules]
-    F --> F1[cloud-functions]
-    F --> F2[github-ops-cli]
-    F --> F3[ranson-scripts]
+    F --> F1[Various Helper Scripts]
 ```
 
 ### Applications
 - **web/portfolio** - Portfolio web application
-
-### Assets
-#### Builders
-- **builders** - Build configuration and tools
-
-#### Terraform Modules
-- **tf-gcp-artifact-registry** - Google Artifact Registry management
-- **tf-gcp-bucket** - GCP bucket configuration
-- **tf-gcp-cloud-run** - Cloud Run service deployment
-- **tf-gcp-cloudfunction** - Cloud Functions management
-- **tf-gcp-dns** - DNS configuration
-- **tf-gcp-gh-pipeline** - GitHub Actions pipeline setup
-- **tf-gcp-lb** - Load Balancer configuration
-- **tf-gcp-project** - GCP project setup and management
-- **tf-gcp-secret** - Secret management
-- **tf-gcp-storage** - Storage configuration
-- **tf-web-deployer** - Web application deployment
-
-#### Scripts
-- **cloud-functions** - Cloud Functions utilities
-- **github-ops-cli** - GitHub Operations CLI tools
-- **ranson-scripts** - Utility scripts collection
 
 ## 🚀 Getting Started
 
@@ -102,8 +82,6 @@ Each submodule contains its own README with specific documentation. Please refer
 
 ### Key Modules Documentation
 - [Portfolio Web App](apps/web/portfolio/README.md)
-- [GCP Project Module](assets/modules/tf-gcp-project/README.md)
-- [GitHub Ops CLI](assets/scripts/github-ops-cli/README.md)
 
 ## 🔄 Update Strategy
 
