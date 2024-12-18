@@ -23,7 +23,9 @@ inputs = {
       name = "tmpl-nodejs-express"
     },
     {
-      name = "cloud-functions"
+      name         = "cloud-functions"
+      pr_trigger   = false # Only create push trigger
+      push_trigger = true
     },
     {
       name         = "github-ops-cli"
