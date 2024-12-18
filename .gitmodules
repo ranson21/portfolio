@@ -43,3 +43,6 @@
 [submodule "assets/modules/tf-web-deployer"]
 	path = assets/modules/tf-web-deployer
 	url = git@github.com:ranson21/tf-web-deployer
+[submodule "assets/scripts/github-ops-cli"]
+	path = assets/scripts/github-ops-cli
+	url = git@github.com:ranson21/github-ops-cli
