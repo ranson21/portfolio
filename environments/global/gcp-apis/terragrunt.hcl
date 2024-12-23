@@ -11,6 +11,7 @@ inputs = {
   disable_services_on_destroy = false
   activate_apis = [
     "cloudbilling.googleapis.com",
+    "cloudidentity.googleapis.com",
     "cloudfunctions.googleapis.com",
     "billingbudgets.googleapis.com",
     "run.googleapis.com",
@@ -24,7 +25,8 @@ inputs = {
     "cloudbuild.googleapis.com",
     "iamcredentials.googleapis.com",
     "monitoring.googleapis.com",
-    "logging.googleapis.com"
+    "logging.googleapis.com",
+    "iap.googleapis.com"
   ]
 }
 

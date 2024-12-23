@@ -10,3 +10,5 @@ terraform/
 
 # Ignore Mac files
 .DS_Store
+
+tmp

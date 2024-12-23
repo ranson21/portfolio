@@ -46,3 +46,9 @@
 [submodule "assets/scripts/github-ops-cli"]
 	path = assets/scripts/github-ops-cli
 	url = git@github.com:ranson21/github-ops-cli
+[submodule "apps/web/gcp-ovpn-portal"]
+	path = apps/web/gcp-ovpn-portal
+	url = git@github.com:ranson21/gcp-ovpn-portal
+[submodule "assets/modules/tf-gcp-ovpn"]
+	path = assets/modules/tf-gcp-ovpn
+	url = git@github.com:ranson21/tf-gcp-ovpn
