@@ -58,7 +58,7 @@ Each Terraform module is independently versioned and can be used in your Terrafo
 
 ```hcl
 module "gcp_project" {
-  source = "git::https://github.com/your-org/your-repo//assets/modules/tf-gcp-project?ref=master"
+  source = "git::https://github.com/ranson21/portfolio/assets/modules/tf-gcp-project?ref=master"
   # Module specific variables
 }
 ```

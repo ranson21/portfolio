@@ -20,6 +20,9 @@ inputs = {
       name = "portfolio-web"
     },
     {
+      name = "gcp-ovpn-portal"
+    },
+    {
       name = "tmpl-nodejs-express"
     },
     {

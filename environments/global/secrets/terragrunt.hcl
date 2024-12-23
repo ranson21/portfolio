@@ -11,7 +11,9 @@ inputs = {
   project = dependency.project.outputs.project
   secrets = {
     github_token      = get_env("GITHUB_TOKEN")
+    pypi_token        = get_env("PYPI_TOKEN")
     slack_webhook_url = get_env("SLACK_WEBHOOK_URL")
+    codecov_token     = get_env("CODECOV_TOKEN")
   }
 }
 
