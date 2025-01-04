@@ -52,7 +52,9 @@ inputs = {
     "roles/iam.serviceAccountUser",
     "roles/cloudfunctions.admin",
     "roles/resourcemanager.projectIamAdmin",
-    "roles/iam.securityAdmin"
+    "roles/iam.securityAdmin",
+    "roles/secretmanager.secretAccessor",
+    "roles/secretmanager.viewer"
   ]
 }
 
