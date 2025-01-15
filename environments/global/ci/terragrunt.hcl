@@ -69,7 +69,8 @@ inputs = {
     "roles/resourcemanager.projectIamAdmin",
     "roles/iam.securityAdmin",
     "roles/secretmanager.secretAccessor",
-    "roles/secretmanager.viewer"
+    "roles/secretmanager.viewer",
+    "roles/iap.admin"
   ]
 }
 
