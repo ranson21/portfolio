@@ -32,6 +32,7 @@ steps:
         git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
         make deploy
     id: "publish"
+    secretEnv: ["GITHUB_TOKEN"]
     waitFor: ["bump-version"]
 
   # Create GitHub release
