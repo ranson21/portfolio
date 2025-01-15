@@ -29,6 +29,7 @@ steps:
     args:
       - "-c"
       - |
+        apk add --no-cache jq
         git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
         make deploy
     id: "publish"
