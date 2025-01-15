@@ -1,2 +1,2 @@
 deploy:
-	@terragrunt run-all apply --terragrunt-non-interactive
+	@cd environments/stable && terragrunt run-all apply --terragrunt-non-interactive
