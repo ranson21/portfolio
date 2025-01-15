@@ -31,7 +31,6 @@ steps:
       - |
         git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
         make deploy
-    secretEnv: ["PYPI_TOKEN"]
     id: "publish"
     waitFor: ["bump-version"]
 
