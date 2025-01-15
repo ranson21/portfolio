@@ -70,10 +70,7 @@ inputs = {
     "roles/iam.securityAdmin",
     "roles/secretmanager.secretAccessor",
     "roles/secretmanager.viewer",
-    "roles/iap.admin",
-    "roles/oauthconfig.editor",            # Allows managing OAuth configurations
-    "roles/clientauthconfig.client",       # Allows managing OAuth client configurations
-    "roles/serviceusage.serviceUsageAdmin" # Allows managing API service usage
+    "roles/iap.admin"
   ]
 }
 
