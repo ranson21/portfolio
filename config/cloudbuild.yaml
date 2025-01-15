@@ -25,14 +25,9 @@ steps:
 
   # Publish to PyPI if this is a merge to main
   - name: "us-central1-docker.pkg.dev/${PROJECT_ID}/docker/dev-tools-builder:terraform"
-    entrypoint: "bash"
-    args:
-      - "-c"
-      - |
-        apk add --no-cache jq
-        git config --global url."https://oauth2:$${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
-        make deploy
-    id: "publish"
+    entrypoint: "make"
+    args: ["deploy"]
+    id: "deploy"
     secretEnv: ["GITHUB_TOKEN"]
     waitFor: ["bump-version"]
 
@@ -49,7 +44,7 @@ steps:
       - "--skip-asset"
     secretEnv: ["GITHUB_TOKEN"]
     id: "create-release"
-    waitFor: ["publish"]
+    waitFor: ["deploy"]
 
 options:
   logging: CLOUD_LOGGING_ONLY
@@ -57,7 +52,7 @@ options:
 timeout: "1200s" # 20 minute timeout
 
 substitutions:
-  _PR_TYPE: "timestamp"
+  _PR_TYPE: "patch" # Default to patching
   _REPO: "portfolio"
   _REPO_OWNER: ""
   _IS_MERGE: "false"
