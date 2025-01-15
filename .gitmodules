@@ -52,3 +52,9 @@
 [submodule "assets/modules/tf-gcp-ovpn"]
 	path = assets/modules/tf-gcp-ovpn
 	url = git@github.com:ranson21/tf-gcp-ovpn
+[submodule "assets/images/ansible-openvpn"]
+	path = assets/images/ansible-openvpn
+	url = git@github.com:ranson21/ansible-openvpn
+[submodule "assets/images/dev-tools-builder"]
+	path = assets/images/dev-tools-builder
+	url = git@github.com:ranson21/dev-tools-builder
