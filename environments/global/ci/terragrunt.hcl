@@ -31,6 +31,16 @@ inputs = {
       push_trigger = true
     },
     {
+      name         = "dev-tools-builder"
+      pr_trigger   = false # Only create push trigger
+      push_trigger = true
+    },
+    {
+      name         = "ansible-openvpn"
+      pr_trigger   = false # Only create push trigger
+      push_trigger = true
+    },
+    {
       name         = "github-ops-cli"
       pr_trigger   = false # Only create push trigger
       push_trigger = true
