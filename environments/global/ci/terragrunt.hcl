@@ -36,6 +36,16 @@ inputs = {
       push_trigger = true
     },
     {
+      name         = "tf-gcp-cloudfunction"
+      pr_trigger   = false # Only create push trigger
+      push_trigger = true
+    },
+    {
+      name         = "tf-gcp-dns"
+      pr_trigger   = false # Only create push trigger
+      push_trigger = true
+    },
+    {
       name         = "tf-gcp-ovpn"
       pr_trigger   = false # Only create push trigger
       push_trigger = true
@@ -70,7 +80,9 @@ inputs = {
     "roles/iam.securityAdmin",
     "roles/secretmanager.secretAccessor",
     "roles/secretmanager.viewer",
-    "roles/iap.admin"
+    "roles/iap.admin",
+    "roles/serviceusage.serviceUsageAdmin",
+    "roles/oauthconfig.editor"
   ]
 }
 
