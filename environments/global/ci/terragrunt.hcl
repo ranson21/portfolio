@@ -7,6 +7,50 @@ terraform {
   source = "${include.parent.locals.source}/tf-gcp-gh-pipeline"
 }
 
+locals {
+  # Repositories that have both PR and push triggers
+  dual_trigger_repos = [
+    "portfolio-web",
+    "gcp-ovpn-portal",
+    "tmpl-nodejs-express"
+  ]
+
+  # Repositories that only have push triggers
+  push_trigger_repos = [
+    "ansible-openvpn",
+    "dev-tools-builder",
+    "github-ops-cli",
+    "portfolio"
+    "cloud-functions",
+    "tf-web-deployer",
+    "tf-gcp-storage",
+    "tf-gcp-secret",
+    "tf-gcp-project",
+    "tf-gcp-lb",
+    "tf-gcp-gh-pipeline",
+    "tf-gcp-dns",
+    "tf-gcp-cloudfunction",
+    "tf-gcp-cloud-run",
+    "tf-gcp-artifact-registry",
+    "tf-gcp-bucket",
+    "tf-gcp-ovpn",
+  ]
+
+  # Convert arrays to the required object format
+  repos = concat(
+    [for repo in local.dual_trigger_repos : {
+      name         = repo
+      pr_trigger   = true
+      push_trigger = true
+    }],
+    [for repo in local.push_trigger_repos : {
+      name         = repo
+      pr_trigger   = false
+      push_trigger = true
+    }]
+  )
+}
+
 inputs = {
   region          = include.parent.locals.region
   project         = dependency.project.outputs.project
@@ -15,47 +59,8 @@ inputs = {
   connection_name = "github"
   installation_id = "51375780"
   repo_owner      = "ranson21"
-  repos = [
-    {
-      name = "portfolio-web"
-    },
-    {
-      name = "gcp-ovpn-portal"
-    },
-    {
-      name = "tmpl-nodejs-express"
-    },
-    {
-      name         = "cloud-functions"
-      pr_trigger   = false # Only create push trigger
-      push_trigger = true
-    },
-    {
-      name         = "dev-tools-builder"
-      pr_trigger   = false # Only create push trigger
-      push_trigger = true
-    },
-    {
-      name         = "tf-gcp-ovpn"
-      pr_trigger   = false # Only create push trigger
-      push_trigger = true
-    },
-    {
-      name         = "ansible-openvpn"
-      pr_trigger   = false # Only create push trigger
-      push_trigger = true
-    },
-    {
-      name         = "github-ops-cli"
-      pr_trigger   = false # Only create push trigger
-      push_trigger = true
-    },
-    {
-      name         = "portfolio"
-      pr_trigger   = false # Only create push trigger
-      push_trigger = true
-    },
-  ]
+  repos           = local.repos
+
   cloudbuild_roles = [
     "roles/artifactregistry.reader",
     "roles/storage.admin",
@@ -70,7 +75,9 @@ inputs = {
     "roles/iam.securityAdmin",
     "roles/secretmanager.secretAccessor",
     "roles/secretmanager.viewer",
-    "roles/iap.admin"
+    "roles/iap.admin",
+    "roles/serviceusage.serviceUsageAdmin",
+    "roles/oauthconfig.editor"
   ]
 }
 

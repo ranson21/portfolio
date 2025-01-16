@@ -52,6 +52,7 @@ inputs = {
 
 
   env_vars = {
+    ALLOWED_ORIGIN    = "https://${include.parent.locals.domain}"
     GCP_PROJECT       = dependency.project.outputs.project
     SLACK_WEBHOOK_URL = "sm://projects/${dependency.project.outputs.project}/secrets/slack_webhook_url/versions/latest"
   }

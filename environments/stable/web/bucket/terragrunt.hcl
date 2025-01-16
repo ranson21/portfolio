@@ -29,7 +29,7 @@ inputs = {
   }
 
   cors_rules = [{
-    origin          = [include.parent.locals.domain]
+    origin          = ["https://${include.parent.locals.domain}"]
     method          = ["GET", "HEAD", "OPTIONS"]
     response_header = ["*"]
     max_age_seconds = 3600
