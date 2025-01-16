@@ -17,26 +17,23 @@ locals {
 
   # Repositories that only have push triggers
   push_trigger_repos = [
-    "cloud-functions",
+    "ansible-openvpn",
     "dev-tools-builder",
-
-    # Terraform modules
-    "tf-gcp-cloud-run",
-    "tf-gcp-dns",
-    "tf-gcp-gh-pipeline",
-    "tf-gcp-cloudfunction",
-    "tf-gcp-lb",
-    "tf-gcp-project",
-    "tf-gcp-secret",
-    "tf-gcp-storage",
+    "github-ops-cli",
+    "portfolio"
+    "cloud-functions",
     "tf-web-deployer",
-
+    "tf-gcp-storage",
+    "tf-gcp-secret",
+    "tf-gcp-project",
+    "tf-gcp-lb",
+    "tf-gcp-gh-pipeline",
+    "tf-gcp-dns",
+    "tf-gcp-cloudfunction",
+    "tf-gcp-cloud-run",
     "tf-gcp-artifact-registry",
     "tf-gcp-bucket",
     "tf-gcp-ovpn",
-    "ansible-openvpn",
-    "github-ops-cli",
-    "portfolio"
   ]
 
   # Convert arrays to the required object format
