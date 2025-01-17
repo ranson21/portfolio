@@ -60,6 +60,7 @@ inputs = {
   release_version = local.latest_version
   asset_name      = "release.tar.gz"
   bucket_name     = "abbyranson.com"
+  host            = "firebase"
 
   # Add triggers to force updates when version changes
   triggers = {
