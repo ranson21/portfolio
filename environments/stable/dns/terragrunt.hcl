@@ -13,8 +13,13 @@ inputs = {
   project   = dependency.project.outputs.project
 
   records = {
-    "${include.parent.locals.domain}"     = dependency.portfolio-lb.outputs.external_ip
+    "${include.parent.locals.domain}"     = "199.36.158.100"
     "vpn.${include.parent.locals.domain}" = dependency.vpn_server.outputs.vpn_server_ip
+  }
+
+  txt_records = {
+    "${include.parent.locals.domain}" = "\"hosting-site=abby-ranson\""
+    "_acme-challenge.abbyranson.com"  = get_env("ACME_CHALLENGE_TOKEN")
   }
 }
 
