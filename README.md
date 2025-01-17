@@ -82,6 +82,7 @@ Each submodule contains its own README with specific documentation. Please refer
 
 ### Key Modules Documentation
 - [Portfolio Web App](apps/web/portfolio/README.md)
+- [OpenVPN Web App](apps/web/gcp-ovpn-portal/README.md)
 
 ## 🔄 Update Strategy
 
