@@ -87,6 +87,25 @@ End state visible at `abbyranson.com`.
 
 - **`tf-web-deployer/main.tf:67-76`** uses anonymous `git clone` for `portfolio-web` to read its release. Brittle if the repo becomes private or hits unauthenticated rate limits. Switch to `https://x-access-token:${var.github_token}@github.com/...` or use the GitHub release API directly.
 - **GCP Secret Manager:** Verify `github_token`, `acme_challenge_token`, and any Firebase deploy credentials still exist and are accessible to the Cloud Build service account. The 2024 Firebase migration may have rotated these.
+- **`tf-gcp-gh-pipeline/main.tf:51-60` `for_each` key churn.** The `google_project_iam_member.cloudbuild_permissions` resource keys its `for_each` on `"${role}-${idx}"` where `idx` is the position in a flattened list. Any insertion or reordering of `cloudbuild_roles` shifts every downstream index → terraform sees those bindings as needing destroy+create even though nothing about them changed. The 2026-04-28 apply showed 8 destroys + 8 creates that were pure bookkeeping for this reason.
+
+  **Fix:** key on a stable identity rather than position. Either use the role string alone (one binding per role, but the module currently grants each role to 2 SAs so that loses information), or compose `role + member` (or a hash of the assignment). Example refactor:
+
+  ```hcl
+  resource "google_project_iam_member" "cloudbuild_permissions" {
+    for_each = {
+      for assignment in local.role_assignments :
+      "${assignment.role}|${assignment.member}" => assignment
+    }
+    project = var.project
+    role    = each.value.role
+    member  = each.value.member
+  }
+  ```
+
+  After the change, run `terragrunt apply` once with `terragrunt state mv` calls (or accept a one-time destroy+create churn) to migrate from old keys to new. After migration, future role list edits add/remove only the affected bindings and leave the rest untouched.
+
+  **Why this matters:** every destroy+create on an IAM binding has a small window where the SA temporarily lacks that perm. With the current pattern, every role addition causes ~half the SA's bindings to flap. With the stable-key pattern, only the genuinely-affected bindings change.
 
 ## What is genuinely working
 
