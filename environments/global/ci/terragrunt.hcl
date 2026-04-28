@@ -20,7 +20,7 @@ locals {
     "ansible-openvpn",
     "dev-tools-builder",
     "github-ops-cli",
-    "portfolio"
+    "portfolio",
     "cloud-functions",
     "tf-web-deployer",
     "tf-gcp-storage",
@@ -75,9 +75,17 @@ inputs = {
     "roles/iam.securityAdmin",
     "roles/secretmanager.secretAccessor",
     "roles/secretmanager.viewer",
+    # secretmanager.admin (not just accessor) is required at the project level so
+    # the deploy step can create new secrets. Missing this caused the 2025-11-11
+    # build to fail at secretmanager.secrets.create. (Note: secretmanager.secretAdmin
+    # is resource-level only and rejected by the project IAM API.)
+    "roles/secretmanager.admin",
     "roles/iap.admin",
     "roles/serviceusage.serviceUsageAdmin",
-    "roles/oauthconfig.editor"
+    "roles/oauthconfig.editor",
+    # firebase.admin is required for the firebase deploy step. Was added manually
+    # during the 2025-01 firebase-hosting migration but never reflected in HCL.
+    "roles/firebase.admin"
   ]
 }
 
