@@ -20,7 +20,7 @@ locals {
     "ansible-openvpn",
     "dev-tools-builder",
     "github-ops-cli",
-    "portfolio"
+    "portfolio",
     "cloud-functions",
     "tf-web-deployer",
     "tf-gcp-storage",
