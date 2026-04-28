@@ -4,6 +4,13 @@
 
 A comprehensive infrastructure monorepo containing Terraform modules, deployment scripts, and web applications for Google Cloud Platform infrastructure.
 
+> **⚠️ Before you debug a failed deploy, read [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md).**
+> This stack has many time-bombs (token expiry, PGP key rotation, version drift,
+> silent push failures). The maintenance doc captures the failure patterns we've
+> already paid for and the quarterly + yearly checklist to keep them from recurring.
+> Run the quarterly checks every 3 months — most of this catalogue exists because
+> *not running them* turned a small problem into a multi-month cascade.
+
 ## 📦 Repository Structure
 
 ```mermaid
